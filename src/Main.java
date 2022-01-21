@@ -7,8 +7,8 @@ public class Main{
         sc = new Scanner(System.in);
         System.out.println("Masukkan nama file berisi puzzle:");
         String filename = sc.nextLine();
-        FileIO io = new FileIO();
-        io.fileInput(filename);
-        io.printPuzzle();
+        Puzzle puzzle = new Puzzle();
+        puzzle.fileInput(filename);
+        puzzle.printPuzzle();
     }
 }
