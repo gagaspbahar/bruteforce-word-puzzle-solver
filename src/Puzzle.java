@@ -9,7 +9,7 @@ public class Puzzle {
     private int col;
     private String dir = "..\\test";
 
-    public Puzzle(){
+    public Puzzle() {
         this.puzzle = new char[100][100];
         this.words = new String[100];
         this.row = 0;
@@ -32,8 +32,12 @@ public class Puzzle {
         return this.col;
     }
 
+    public int getWordsLength() {
+        return this.words.length;
+    }
+
     public void fileInput(String filename) {
-        try{
+        try {
             String path = dir + "\\" + filename;
             File file = new File(path);
             Scanner scfile = new Scanner(file);
@@ -58,11 +62,11 @@ public class Puzzle {
                 i++;
             }
             scfile.close();
-        }
-        catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("File tidak ditemukan.");
         }
     }
+
     public void printPuzzle() {
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.col; j++) {
@@ -75,25 +79,4 @@ public class Puzzle {
         }
     }
 
-    public static int lineMatcher(String text, String pattern){
-        int ans = -1;
-        int tLen = text.length();
-        int pLen = pattern.length();
-        for(int i = 0; i < tLen-pLen; i++){
-            int j = 0;
-            while((j < pLen) && text.charAt(i+j) == pattern.charAt(j)){
-                j++;
-            }
-            if(j==pLen){
-                ans = j;
-            }
-        }
-        return ans;
-    }
-
-
-
-    public static void KananChecker(FileIO io) {
-        
-    }
 }
