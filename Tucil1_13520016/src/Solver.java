@@ -178,6 +178,84 @@ public class Solver {
         return ans;
     }
 
+    public static Result wordCheckRightDown(Puzzle p, String word) {
+        Result ans = new Result();
+        String[] check = diagonalizeRightDown(p);
+        int first;
+        int ansCol = -1;
+        int ansRow = -1;
+        int i = p.getRow() - 1;
+        int j = 0;
+        for (int k = 0; k < check.length; k++) {
+            first = lineMatcher(String.valueOf(check[k]), word);
+            if (first != -1) {
+                ansRow = i + first;
+                ansCol = j + first;
+                break;
+            }
+            if (i != 0) {
+                i--;
+            } else {
+                j++;
+            }
+        }
+        if (ansCol != -1) {
+            ans = new Result(ansRow, ansCol, word.length(), "rightDown");
+        }
+        return ans;
+    }
+
+    public static Result wordCheckLeftUp(Puzzle p, String word) {
+        Result ans = new Result();
+        String[] check = diagonalizeRightDown(p);
+        int first;
+        int ansCol = -1;
+        int ansRow = -1;
+        int i = p.getRow() - 1;
+        int j = 0;
+        for (int k = 0; k < check.length; k++) {
+            first = lineMatcher(String.valueOf(reverseString(check[k])), word);
+            if (first != -1) {
+                ansRow = i + (check[k].trim().length() - 1 - first);
+                ansCol = j + (check[k].trim().length() - 1 - first);
+                break;
+            }
+            if (i != 0) {
+                i--;
+            } else {
+                j++;
+            }
+        }
+        if (ansCol != -1) {
+            ans = new Result(ansRow, ansCol, word.length(), "leftUp");
+        }
+        return ans;
+    }
+
+    public static Result allWordCheck(Puzzle p, String word) {
+        Result[] resultList = new Result[8];
+        resultList[0] = wordCheckRight(p, word);
+        resultList[1] = wordCheckLeft(p, word);
+        resultList[2] = wordCheckUp(p, word);
+        resultList[3] = wordCheckDown(p, word);
+        resultList[4] = wordCheckRightUp(p, word);
+        resultList[5] = wordCheckLeftDown(p, word);
+        resultList[6] = wordCheckRightDown(p, word);
+        resultList[7] = wordCheckLeftUp(p, word);
+        // for(int i = 0; i < 8; i++){
+        //     System.out.printf("%d.", i);
+        //     System.out.println(resultList[i].getType());
+        // }
+        
+        int i = 0;
+        Result res = new Result();
+        while (res.getType() == "") {
+            res = resultList[i];
+            i++;
+        }
+        return res;
+    }
+
     public static String[] diagonalize(Puzzle p) {
         char[][] puzzle = p.getPuzzle();
         String[] ans = new String[Math.min(p.getCol(), p.getRow()) * 2];
@@ -212,6 +290,46 @@ public class Solver {
             k++;
             l++;
             i = p.getRow() - 1;
+            j = l;
+        }
+        return ans;
+    }
+
+    public static String[] diagonalizeRightDown(Puzzle p) {
+        char[][] puzzle = p.getPuzzle();
+        String[] ans = new String[Math.min(p.getCol(), p.getRow()) * 2];
+        String temp = "";
+        int i = p.getRow() - 1;
+        int j = 0;
+        int count = 0;
+        int k = i;
+        int l = 1;
+        while (k != -1) {
+            temp = "";
+            do {
+                temp += puzzle[i][j];
+                i++;
+                j++;
+            } while (i < p.getRow());
+            ans[count] = temp;
+            count++;
+            k--;
+            i = k;
+            j = 0;
+        }
+        i = 0;
+        j = l;
+        while (l != p.getCol()) {
+            temp = "";
+            do {
+                temp += puzzle[i][j];
+                i++;
+                j++;
+            } while (i < p.getRow());
+            ans[count] = temp;
+            count++;
+            l++;
+            i = 0;
             j = l;
         }
         return ans;

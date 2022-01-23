@@ -7,6 +7,7 @@ public class Puzzle {
     private String[] words;
     private int row;
     private int col;
+    private int wordsLength;
     private String dir = "..\\test";
     private int CAPACITY = 100;
 
@@ -15,6 +16,7 @@ public class Puzzle {
         this.words = new String[100];
         this.row = 0;
         this.col = 0;
+        this.wordsLength = 0;
     }
 
     public char[][] getPuzzle() {
@@ -34,7 +36,7 @@ public class Puzzle {
     }
 
     public int getWordsLength() {
-        return this.words.length;
+        return this.wordsLength;
     }
 
     public int getCapacity() {
@@ -65,6 +67,7 @@ public class Puzzle {
                 this.words[i] = line.trim();
                 i++;
             }
+            this.wordsLength = i;
             scfile.close();
         } catch (FileNotFoundException e) {
             System.out.println("File tidak ditemukan.");

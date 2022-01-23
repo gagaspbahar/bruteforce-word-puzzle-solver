@@ -83,6 +83,25 @@ public class Result {
                     c--;
                 }
                 break;
+            case "rightDown":
+                r = this.firstRow;
+                c = this.firstCol;
+                for (int i = 0; i < this.ansLength; i++) {
+                    puzzleTable[r][c] = true;
+                    r++;
+                    c++;
+                }
+                break;
+            case "leftUp":
+                r = this.firstRow;
+                c = this.firstCol;
+                for (int i = 0; i < this.ansLength; i++) {
+                    puzzleTable[r][c] = true;
+                    r--;
+                    c--;
+                }
+                break;
+
             default:
                 System.out.println("not implemented.");
                 break;
