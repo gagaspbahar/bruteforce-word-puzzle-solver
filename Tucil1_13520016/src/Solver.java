@@ -11,10 +11,9 @@ public class Solver {
                 int j = 0;
                 while (j < pLen) {
                     comp++;
-                    if(text.charAt(i + j) == pattern.charAt(j)){
+                    if (text.charAt(i + j) == pattern.charAt(j)) {
                         j++;
-                    }
-                    else{
+                    } else {
                         break;
                     }
                 }
@@ -23,7 +22,7 @@ public class Solver {
                 }
             }
         }
-        p.setComparison(p.getComparison()+comp);
+        p.setComparison(p.getComparison() + comp);
         return ans;
     }
 
@@ -43,10 +42,6 @@ public class Solver {
         return ans;
     }
 
-    // TODO: Pikirin cara return
-    // ! Note: 2 Possible Approaches: Loop words inside checker function, or one
-    // word per checker, loop in main function.
-    // To Return: Posisi Awal, Word Length
 
     public static Result wordCheckRight(Puzzle p, String word) {
         Result ans = new Result();
@@ -250,10 +245,6 @@ public class Solver {
         resultList[5] = wordCheckLeftDown(p, word);
         resultList[6] = wordCheckRightDown(p, word);
         resultList[7] = wordCheckLeftUp(p, word);
-        // for(int i = 0; i < 8; i++){
-        // System.out.printf("%d.", i);
-        // System.out.println(resultList[i].getType());
-        // }
 
         int i = 0;
         Result res = new Result();
@@ -267,7 +258,7 @@ public class Solver {
     public static String[] diagonalize(Puzzle p) {
         char[][] puzzle = p.getPuzzle();
         int min = Math.min(p.getCol(), p.getRow()) * 2;
-        if(p.getCol() == p.getRow()){
+        if (p.getCol() == p.getRow()) {
             min--;
         }
         String[] ans = new String[min];
@@ -291,7 +282,6 @@ public class Solver {
         i = p.getRow() - 1;
         j = l;
         while (l != p.getCol()) {
-            // System.out.printf("%d %d\n", i, j);
             temp = "";
             do {
                 temp += puzzle[i][j];
@@ -310,7 +300,7 @@ public class Solver {
     public static String[] diagonalizeRightDown(Puzzle p) {
         char[][] puzzle = p.getPuzzle();
         int min = Math.min(p.getCol(), p.getRow()) * 2;
-        if(p.getCol() == p.getRow()){
+        if (p.getCol() == p.getRow()) {
             min--;
         }
         String[] ans = new String[min];

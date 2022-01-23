@@ -49,7 +49,7 @@ public class Puzzle {
         return this.comparison;
     }
 
-    public void setComparison(int x){
+    public void setComparison(int x) {
         this.comparison = x;
     }
 
@@ -82,6 +82,7 @@ public class Puzzle {
             scfile.close();
         } catch (FileNotFoundException e) {
             System.out.println("File tidak ditemukan.");
+            System.exit(0);
         }
     }
 

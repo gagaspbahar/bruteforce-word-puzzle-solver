@@ -34,6 +34,7 @@ public class Result {
         return this.type;
     }
 
+    // TODO: Refactor this
     public void printResult(Puzzle p) {
         int row = p.getRow();
         int col = p.getCol();
