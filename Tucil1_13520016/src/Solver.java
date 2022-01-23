@@ -10,7 +10,7 @@ public class Solver {
                 j++;
             }
             if (j == pLen) {
-                ans = j;
+                ans = i;
             }
         }
         return ans;
@@ -24,38 +24,107 @@ public class Solver {
         return ans;
     }
 
-    // private static String diagonalizeCharArray(Puzzle p, int startCol, int startRow) {
-    //     String ans = "";
-    //     int max = (startCol > startRow) ? startCol : startRow;
-    //     return ans;
+    private static String reverseString(String s) {
+        String ans = "";
+        for (int i = s.length() - 1; i >= 0; i--) {
+            ans += s.charAt(i);
+        }
+        return ans;
+    }
+
+    // private static String diagonalizeCharArray(Puzzle p, int startCol, int
+    // startRow) {
+    // String ans = "";
+    // int max = (startCol > startRow) ? startCol : startRow;
+    // return ans;
     // }
 
     // TODO: Pikirin cara return
     // ! Note: 2 Possible Approaches: Loop words inside checker function, or one
     // word per checker, loop in main function.
     // To Return: Posisi Awal, Word Length
-    public static int[] RightChecker(Puzzle p) {
-        int first = -1;
-        int wlen = p.getWordsLength();
-        int[] ans = new int[wlen];
-        for (int i = 0; i < wlen; i++) {
-            for (int j = 0; j < p.getRow(); j++) {
-                first = lineMatcher(String.valueOf(p.getPuzzle()[j]), p.getWords()[i]);
+
+    public static Result wordCheckRight(Puzzle p, String word) {
+        Result ans = new Result();
+        int first;
+        int ansFirst = -1;
+        int ansRow = -1;
+        for (int j = 0; j < p.getRow(); j++) {
+            first = lineMatcher(String.valueOf(p.getPuzzle()[j]), word);
+            if (first != -1) {
+                ansRow = j;
+                ansFirst = first;
+                break;
             }
+        }
+        if (ansFirst != -1) {
+            ans = new Result(ansRow, ansFirst, word.length(), "right");
         }
         return ans;
     }
 
-    public static int[] LeftChecker(Puzzle p) {
-        int first = -1;
-        int wlen = p.getWordsLength();
-        int[] ans = new int[wlen];
-        for (int i = 0; i < wlen; i++) {
-            for (int j = 0; j < p.getRow(); j++) {
-                first = lineMatcher(reverseCharArray(p.getPuzzle()[j]), p.getWords()[i]);
+    public static Result wordCheckLeft(Puzzle p, String word) {
+        Result ans = new Result();
+        int first;
+        int ansFirst = -1;
+        int ansRow = -1;
+        for (int j = 0; j < p.getRow(); j++) {
+            first = lineMatcher(reverseCharArray(p.getPuzzle()[j]), word);
+            if (first != -1) {
+                ansRow = j;
+                ansFirst = first;
+                break;
             }
+        }
+        if (ansFirst != -1) {
+            ans = new Result(ansFirst, ansRow, word.length(), "left");
         }
         return ans;
     }
 
+    public static Result wordCheckDown(Puzzle p, String word) {
+        Result ans = new Result();
+        int first;
+        int ansFirst = -1;
+        int ansRow = -1;
+        for (int j = 0; j < p.getCol(); j++) {
+            String text = "";
+            for (int i = 0; i < p.getRow(); i++) {
+                text += p.getPuzzle()[i][j];
+            }
+            first = lineMatcher(text, word);
+            if (first != -1) {
+                ansRow = j;
+                ansFirst = first;
+                break;
+            }
+        }
+        if (ansFirst != -1) {
+            ans = new Result(ansFirst, ansRow, word.length(), "down");
+        }
+        return ans;
+    }
+
+    public static Result wordCheckUp(Puzzle p, String word) {
+        Result ans = new Result();
+        int first;
+        int ansFirst = -1;
+        int ansRow = -1;
+        for (int j = 0; j < p.getCol(); j++) {
+            String text = "";
+            for (int i = 0; i < p.getRow(); i++) {
+                text += p.getPuzzle()[i][j];
+            }
+            first = lineMatcher(reverseString(text), word);
+            if (first != -1) {
+                ansRow = j;
+                ansFirst = first;
+                break;
+            }
+        }
+        if (ansFirst != -1) {
+            ans = new Result(ansFirst, ansRow, word.length(), "up");
+        }
+        return ans;
+    }
 }
