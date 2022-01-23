@@ -37,6 +37,7 @@ public class Result {
     public void printResult(Puzzle p) {
         int row = p.getRow();
         int col = p.getCol();
+        int start;
         char[][] puzzle = p.getPuzzle();
         boolean puzzleTable[][] = new boolean[row][col];
         switch (this.type) {
@@ -46,7 +47,8 @@ public class Result {
                 }
                 break;
             case "left":
-                for (int i = this.firstCol; i >= this.firstCol - this.ansLength; i--) {
+                start = (p.getCol() - 1) - this.firstCol;
+                for (int i = start; i >= start - (this.ansLength - 1); i--) {
                     puzzleTable[this.firstRow][i] = true;
                 }
                 break;
@@ -56,7 +58,8 @@ public class Result {
                 }
                 break;
             case "up":
-                for (int i = this.firstRow; i >= this.firstRow - this.ansLength; i--) {
+                start = (p.getRow() - 1) - this.firstRow;
+                for (int i = start; i >= start - (this.ansLength - 1); i--) {
                     puzzleTable[i][this.firstCol] = true;
                 }
                 break;

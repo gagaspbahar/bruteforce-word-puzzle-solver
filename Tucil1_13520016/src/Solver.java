@@ -78,16 +78,17 @@ public class Solver {
             }
         }
         if (ansFirst != -1) {
-            ans = new Result(ansFirst, ansRow, word.length(), "left");
+            ans = new Result(ansRow, ansFirst, word.length(), "left");
         }
         return ans;
     }
-    // Issue: First returns 94 (100-6) not 2 (8-6)
+
+    // ! Issue: First returns 94 (100-6) not 2 (8-6)
     public static Result wordCheckDown(Puzzle p, String word) {
         Result ans = new Result();
         int first;
         int ansFirst = -1;
-        int ansRow = -1;
+        int ansCol = -1;
         for (int j = 0; j < p.getCol(); j++) {
             String text = "";
             for (int i = 0; i < p.getRow(); i++) {
@@ -95,13 +96,13 @@ public class Solver {
             }
             first = lineMatcher(text, word);
             if (first != -1) {
-                ansRow = j;
+                ansCol = j;
                 ansFirst = first;
                 break;
             }
         }
         if (ansFirst != -1) {
-            ans = new Result(ansFirst, ansRow, word.length(), "down");
+            ans = new Result(ansFirst, ansCol, word.length(), "down");
         }
         return ans;
     }
@@ -110,7 +111,7 @@ public class Solver {
         Result ans = new Result();
         int first;
         int ansFirst = -1;
-        int ansRow = -1;
+        int ansCol = -1;
         for (int j = 0; j < p.getCol(); j++) {
             String text = "";
             for (int i = 0; i < p.getRow(); i++) {
@@ -118,13 +119,13 @@ public class Solver {
             }
             first = lineMatcher(reverseString(text), word);
             if (first != -1) {
-                ansRow = j;
+                ansCol = j;
                 ansFirst = first;
                 break;
             }
         }
         if (ansFirst != -1) {
-            ans = new Result(ansFirst, ansRow, word.length(), "up");
+            ans = new Result(ansFirst, ansCol, word.length(), "up");
         }
         return ans;
     }

@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class Main {
     public static Scanner sc;
 
@@ -12,7 +11,7 @@ public class Main {
         Puzzle puzzle = new Puzzle();
         puzzle.fileInput(filename);
         puzzle.printPuzzle();
-        Result r = Solver.wordCheckLeft(puzzle, puzzle.getWords()[6]);
+        Result r = Solver.wordCheckUp(puzzle, puzzle.getWords()[2]);
         r.printResult(puzzle);
     }
 }
