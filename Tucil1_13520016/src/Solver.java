@@ -5,13 +5,15 @@ public class Solver {
         text = text.trim();
         int tLen = text.trim().length();
         int pLen = pattern.length();
-        for (int i = 0; i <= tLen - pLen; i++) {
-            int j = 0;
-            while ((j < pLen) && text.charAt(i + j) == pattern.charAt(j)) {
-                j++;
-            }
-            if (j == pLen) {
-                ans = i;
+        if (pLen <= tLen) {
+            for (int i = 0; i <= tLen - pLen; i++) {
+                int j = 0;
+                while ((j < pLen) && text.charAt(i + j) == pattern.charAt(j)) {
+                    j++;
+                }
+                if (j == pLen) {
+                    ans = i;
+                }
             }
         }
         return ans;
@@ -126,6 +128,72 @@ public class Solver {
         }
         if (ansFirst != -1) {
             ans = new Result(ansFirst, ansCol, word.length(), "up");
+        }
+        return ans;
+    }
+
+    public static Result wordCheckRightUp(Puzzle p, String word) {
+        Result ans = new Result();
+        String[] check = diagonalize(p);
+        int first;
+        int ansCol = -1;
+        int ansRow = -1;
+        int i = 0;
+        int j = 0;
+        for (int k = 0; k < check.length; k++) {
+            first = lineMatcher(String.valueOf(check[k]), word);
+            if (first != -1) {
+                ansRow = i-first;
+                ansCol = j+first;
+                break;
+            }
+            if (i != p.getRow() - 1) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        if (ansCol != -1) {
+            ans = new Result(ansRow, ansCol, word.length(), "rightUp");
+        }
+        return ans;
+    }
+
+    public static String[] diagonalize(Puzzle p) {
+        char[][] puzzle = p.getPuzzle();
+        String[] ans = new String[Math.min(p.getCol(), p.getRow()) * 2];
+        String temp = "";
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        int l = 1;
+        while (k != p.getRow()) {
+            temp = "";
+            do {
+                temp += puzzle[i][j];
+                i--;
+                j++;
+            } while (i >= 0);
+            ans[k] = temp;
+            k++;
+            i = k;
+            j = 0;
+        }
+        i = p.getRow() - 1;
+        j = l;
+        while (l != p.getCol()) {
+            // System.out.printf("%d %d\n", i, j);
+            temp = "";
+            do {
+                temp += puzzle[i][j];
+                i--;
+                j++;
+            } while (i >= 0);
+            ans[k] = temp;
+            k++;
+            l++;
+            i = p.getRow() - 1;
+            j = l;
         }
         return ans;
     }

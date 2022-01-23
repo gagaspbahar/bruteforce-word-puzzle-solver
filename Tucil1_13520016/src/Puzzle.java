@@ -8,6 +8,7 @@ public class Puzzle {
     private int row;
     private int col;
     private String dir = "..\\test";
+    private int CAPACITY = 100;
 
     public Puzzle() {
         this.puzzle = new char[100][100];
@@ -36,6 +37,9 @@ public class Puzzle {
         return this.words.length;
     }
 
+    public int getCapacity() {
+        return this.CAPACITY;
+    }
     public void fileInput(String filename) {
         try {
             String path = dir + "\\" + filename;

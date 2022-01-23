@@ -11,7 +11,13 @@ public class Main {
         Puzzle puzzle = new Puzzle();
         puzzle.fileInput(filename);
         puzzle.printPuzzle();
-        Result r = Solver.wordCheckUp(puzzle, puzzle.getWords()[2]);
+        System.out.println("======");
+        String[] test = Solver.diagonalize(puzzle);
+        for(int i = 0; i < test.length; i++){
+            System.out.println(test[i]);
+        }
+        Result r = Solver.wordCheckRightUp(puzzle, puzzle.getWords()[7]);
         r.printResult(puzzle);
+        
     }
 }

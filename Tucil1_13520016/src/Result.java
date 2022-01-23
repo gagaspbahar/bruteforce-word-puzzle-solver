@@ -38,6 +38,8 @@ public class Result {
         int row = p.getRow();
         int col = p.getCol();
         int start;
+        int r;
+        int c;
         char[][] puzzle = p.getPuzzle();
         boolean puzzleTable[][] = new boolean[row][col];
         switch (this.type) {
@@ -63,8 +65,18 @@ public class Result {
                     puzzleTable[i][this.firstCol] = true;
                 }
                 break;
+            case "rightUp":
+                // System.out.printf("%d %d\n", this.firstRow, this.firstCol);
+                r = this.firstRow;
+                c = this.firstCol;
+                while(r >= 0){
+                    puzzleTable[r][c] = true;
+                    r--;
+                    c++;
+                }
+                break;
             default:
-                System.out.println(this.type);
+                System.out.println("not implemented.");
                 break;
         }
 
