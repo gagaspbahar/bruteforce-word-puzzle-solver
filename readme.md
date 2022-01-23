@@ -11,3 +11,13 @@ A word search puzzle solver made in Java, implemented with brute force algorithm
 
 ## Features
 - Solving word search puzzles
+
+## How to run?
+### For windows users:
+- `cd Tucil1_13520016`
+- `./build.bat`
+- `./run.bat`
+### For Unix-based OS / GNU make users:
+- `cd Tucil1_13520016`
+- `make build`
+- `make run`
