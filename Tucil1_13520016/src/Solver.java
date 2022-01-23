@@ -1,21 +1,29 @@
 public class Solver {
 
-    public static int lineMatcher(String text, String pattern) {
+    public static int lineMatcher(String text, String pattern, Puzzle p) {
         int ans = -1;
         text = text.trim();
         int tLen = text.trim().length();
         int pLen = pattern.length();
+        int comp = 0;
         if (pLen <= tLen) {
             for (int i = 0; i <= tLen - pLen; i++) {
                 int j = 0;
-                while ((j < pLen) && text.charAt(i + j) == pattern.charAt(j)) {
-                    j++;
+                while (j < pLen) {
+                    comp++;
+                    if(text.charAt(i + j) == pattern.charAt(j)){
+                        j++;
+                    }
+                    else{
+                        break;
+                    }
                 }
                 if (j == pLen) {
                     ans = i;
                 }
             }
         }
+        p.setComparison(p.getComparison()+comp);
         return ans;
     }
 
@@ -46,7 +54,7 @@ public class Solver {
         int ansFirst = -1;
         int ansRow = -1;
         for (int j = 0; j < p.getRow(); j++) {
-            first = lineMatcher(String.valueOf(p.getPuzzle()[j]), word);
+            first = lineMatcher(String.valueOf(p.getPuzzle()[j]), word, p);
             if (first != -1) {
                 ansRow = j;
                 ansFirst = first;
@@ -65,7 +73,7 @@ public class Solver {
         int ansFirst = -1;
         int ansRow = -1;
         for (int j = 0; j < p.getRow(); j++) {
-            first = lineMatcher(reverseCharArray(p.getPuzzle()[j]), word);
+            first = lineMatcher(reverseCharArray(p.getPuzzle()[j]), word, p);
             if (first != -1) {
                 ansRow = j;
                 ansFirst = first;
@@ -88,7 +96,7 @@ public class Solver {
             for (int i = 0; i < p.getRow(); i++) {
                 text += p.getPuzzle()[i][j];
             }
-            first = lineMatcher(text, word);
+            first = lineMatcher(text, word, p);
             if (first != -1) {
                 ansCol = j;
                 ansFirst = first;
@@ -111,7 +119,7 @@ public class Solver {
             for (int i = 0; i < p.getRow(); i++) {
                 text += p.getPuzzle()[i][j];
             }
-            first = lineMatcher(reverseString(text), word);
+            first = lineMatcher(reverseString(text), word, p);
             if (first != -1) {
                 ansCol = j;
                 ansFirst = first;
@@ -133,7 +141,7 @@ public class Solver {
         int i = 0;
         int j = 0;
         for (int k = 0; k < check.length; k++) {
-            first = lineMatcher(String.valueOf(check[k]), word);
+            first = lineMatcher(String.valueOf(check[k]), word, p);
             if (first != -1) {
                 ansRow = i - first;
                 ansCol = j + first;
@@ -160,7 +168,7 @@ public class Solver {
         int i = 0;
         int j = 0;
         for (int k = 0; k < check.length; k++) {
-            first = lineMatcher(String.valueOf(reverseString(check[k])), word);
+            first = lineMatcher(String.valueOf(reverseString(check[k])), word, p);
             if (first != -1) {
                 ansRow = i - (check[k].trim().length() - 1) + first;
                 ansCol = j + (check[k].trim().length() - 1) - first;
@@ -187,7 +195,7 @@ public class Solver {
         int i = p.getRow() - 1;
         int j = 0;
         for (int k = 0; k < check.length; k++) {
-            first = lineMatcher(String.valueOf(check[k]), word);
+            first = lineMatcher(String.valueOf(check[k]), word, p);
             if (first != -1) {
                 ansRow = i + first;
                 ansCol = j + first;
@@ -214,7 +222,7 @@ public class Solver {
         int i = p.getRow() - 1;
         int j = 0;
         for (int k = 0; k < check.length; k++) {
-            first = lineMatcher(String.valueOf(reverseString(check[k])), word);
+            first = lineMatcher(String.valueOf(reverseString(check[k])), word, p);
             if (first != -1) {
                 ansRow = i + (check[k].trim().length() - 1 - first);
                 ansCol = j + (check[k].trim().length() - 1 - first);
@@ -243,10 +251,10 @@ public class Solver {
         resultList[6] = wordCheckRightDown(p, word);
         resultList[7] = wordCheckLeftUp(p, word);
         // for(int i = 0; i < 8; i++){
-        //     System.out.printf("%d.", i);
-        //     System.out.println(resultList[i].getType());
+        // System.out.printf("%d.", i);
+        // System.out.println(resultList[i].getType());
         // }
-        
+
         int i = 0;
         Result res = new Result();
         while (res.getType() == "") {
@@ -258,7 +266,11 @@ public class Solver {
 
     public static String[] diagonalize(Puzzle p) {
         char[][] puzzle = p.getPuzzle();
-        String[] ans = new String[Math.min(p.getCol(), p.getRow()) * 2];
+        int min = Math.min(p.getCol(), p.getRow()) * 2;
+        if(p.getCol() == p.getRow()){
+            min--;
+        }
+        String[] ans = new String[min];
         String temp = "";
         int i = 0;
         int j = 0;
@@ -297,7 +309,11 @@ public class Solver {
 
     public static String[] diagonalizeRightDown(Puzzle p) {
         char[][] puzzle = p.getPuzzle();
-        String[] ans = new String[Math.min(p.getCol(), p.getRow()) * 2];
+        int min = Math.min(p.getCol(), p.getRow()) * 2;
+        if(p.getCol() == p.getRow()){
+            min--;
+        }
+        String[] ans = new String[min];
         String temp = "";
         int i = p.getRow() - 1;
         int j = 0;

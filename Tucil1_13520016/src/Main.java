@@ -12,6 +12,11 @@ public class Main {
         String filename = sc.nextLine();
         Puzzle puzzle = new Puzzle();
         puzzle.fileInput(filename);
+
+        String[] check = Solver.diagonalize(puzzle);
+        for(int i = 0; i < check.length; i++){
+            System.out.println(check[i]);
+        }
         Result[] resultList = new Result[puzzle.getWordsLength()];
         for (int i = 0; i < puzzle.getWordsLength(); i++) {
             resultList[i] = Solver.allWordCheck(puzzle, puzzle.getWords()[i]);
@@ -21,5 +26,6 @@ public class Main {
         Instant end = Instant.now();
         Duration timeElapsed = Duration.between(start, end);
         System.out.println("Time taken: "+ timeElapsed.toMillis() +" milliseconds");
+        System.out.printf("Comparison made: %d\n", puzzle.getComparison());
     }
 }

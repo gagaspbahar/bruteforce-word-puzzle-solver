@@ -9,14 +9,16 @@ public class Puzzle {
     private int col;
     private int wordsLength;
     private String dir = "..\\test";
-    private int CAPACITY = 100;
+    private int CAPACITY = 500;
+    private int comparison;
 
     public Puzzle() {
-        this.puzzle = new char[100][100];
-        this.words = new String[100];
+        this.puzzle = new char[CAPACITY][CAPACITY];
+        this.words = new String[CAPACITY];
         this.row = 0;
         this.col = 0;
         this.wordsLength = 0;
+        this.comparison = 0;
     }
 
     public char[][] getPuzzle() {
@@ -42,6 +44,15 @@ public class Puzzle {
     public int getCapacity() {
         return this.CAPACITY;
     }
+
+    public int getComparison() {
+        return this.comparison;
+    }
+
+    public void setComparison(int x){
+        this.comparison = x;
+    }
+
     public void fileInput(String filename) {
         try {
             String path = dir + "\\" + filename;
