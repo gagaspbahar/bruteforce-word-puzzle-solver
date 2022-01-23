@@ -2,9 +2,10 @@ public class Solver {
 
     public static int lineMatcher(String text, String pattern) {
         int ans = -1;
-        int tLen = text.length();
+        text = text.trim();
+        int tLen = text.trim().length();
         int pLen = pattern.length();
-        for (int i = 0; i < tLen - pLen; i++) {
+        for (int i = 0; i <= tLen - pLen; i++) {
             int j = 0;
             while ((j < pLen) && text.charAt(i + j) == pattern.charAt(j)) {
                 j++;
@@ -81,7 +82,7 @@ public class Solver {
         }
         return ans;
     }
-
+    // Issue: First returns 94 (100-6) not 2 (8-6)
     public static Result wordCheckDown(Puzzle p, String word) {
         Result ans = new Result();
         int first;

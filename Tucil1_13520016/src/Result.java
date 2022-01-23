@@ -38,34 +38,49 @@ public class Result {
         int row = p.getRow();
         int col = p.getCol();
         char[][] puzzle = p.getPuzzle();
+        boolean puzzleTable[][] = new boolean[row][col];
         switch (this.type) {
             case "right":
-                boolean puzzleTable[][] = new boolean[row][col];
                 for (int i = this.firstCol; i < this.firstCol + this.ansLength; i++) {
                     puzzleTable[this.firstRow][i] = true;
                 }
-                for (int i = 0; i < row; i++) {
-                    for (int j = 0; j < col; j++) {
-                        if(puzzleTable[i][j]){
-                            if (j == col - 1) {
-                                System.out.println(puzzle[i][j]);
-                            } else {
-                                System.out.print(puzzle[i][j] + " ");
-                            }
-                        }
-                        else{
-                            if (j == col - 1) {
-                                System.out.println("-");
-                            } else {
-                                System.out.print("-" + " ");
-                            }
-                        }
-                    }
+                break;
+            case "left":
+                for (int i = this.firstCol; i >= this.firstCol - this.ansLength; i--) {
+                    puzzleTable[this.firstRow][i] = true;
                 }
                 break;
-
-            default:
+            case "down":
+                for (int i = this.firstRow; i < this.firstRow + this.ansLength; i++) {
+                    puzzleTable[i][this.firstCol] = true;
+                }
                 break;
+            case "up":
+                for (int i = this.firstRow; i >= this.firstRow - this.ansLength; i--) {
+                    puzzleTable[i][this.firstCol] = true;
+                }
+                break;
+            default:
+                System.out.println(this.type);
+                break;
+        }
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (puzzleTable[i][j]) {
+                    if (j == col - 1) {
+                        System.out.println(puzzle[i][j]);
+                    } else {
+                        System.out.print(puzzle[i][j] + " ");
+                    }
+                } else {
+                    if (j == col - 1) {
+                        System.out.println("-");
+                    } else {
+                        System.out.print("-" + " ");
+                    }
+                }
+            }
         }
     }
 }

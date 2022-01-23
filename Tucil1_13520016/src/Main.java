@@ -12,7 +12,7 @@ public class Main {
         Puzzle puzzle = new Puzzle();
         puzzle.fileInput(filename);
         puzzle.printPuzzle();
-        Result r = Solver.wordCheckRight(puzzle, puzzle.getWords()[4]);
+        Result r = Solver.wordCheckLeft(puzzle, puzzle.getWords()[6]);
         r.printResult(puzzle);
     }
 }
