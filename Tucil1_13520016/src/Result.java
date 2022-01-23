@@ -66,13 +66,21 @@ public class Result {
                 }
                 break;
             case "rightUp":
-                // System.out.printf("%d %d\n", this.firstRow, this.firstCol);
                 r = this.firstRow;
                 c = this.firstCol;
-                while(r >= 0){
+                for (int i = 0; i < this.ansLength; i++) {
                     puzzleTable[r][c] = true;
                     r--;
                     c++;
+                }
+                break;
+            case "leftDown":
+                r = this.firstRow;
+                c = this.firstCol;
+                for (int i = 0; i < this.ansLength; i++) {
+                    puzzleTable[r][c] = true;
+                    r++;
+                    c--;
                 }
                 break;
             default:

@@ -27,20 +27,13 @@ public class Solver {
         return ans;
     }
 
-    private static String reverseString(String s) {
+    public static String reverseString(String s) {
         String ans = "";
         for (int i = s.length() - 1; i >= 0; i--) {
             ans += s.charAt(i);
         }
         return ans;
     }
-
-    // private static String diagonalizeCharArray(Puzzle p, int startCol, int
-    // startRow) {
-    // String ans = "";
-    // int max = (startCol > startRow) ? startCol : startRow;
-    // return ans;
-    // }
 
     // TODO: Pikirin cara return
     // ! Note: 2 Possible Approaches: Loop words inside checker function, or one
@@ -85,7 +78,6 @@ public class Solver {
         return ans;
     }
 
-    // ! Issue: First returns 94 (100-6) not 2 (8-6)
     public static Result wordCheckDown(Puzzle p, String word) {
         Result ans = new Result();
         int first;
@@ -143,8 +135,8 @@ public class Solver {
         for (int k = 0; k < check.length; k++) {
             first = lineMatcher(String.valueOf(check[k]), word);
             if (first != -1) {
-                ansRow = i-first;
-                ansCol = j+first;
+                ansRow = i - first;
+                ansCol = j + first;
                 break;
             }
             if (i != p.getRow() - 1) {
@@ -155,6 +147,33 @@ public class Solver {
         }
         if (ansCol != -1) {
             ans = new Result(ansRow, ansCol, word.length(), "rightUp");
+        }
+        return ans;
+    }
+
+    public static Result wordCheckLeftDown(Puzzle p, String word) {
+        Result ans = new Result();
+        String[] check = diagonalize(p);
+        int first;
+        int ansCol = -1;
+        int ansRow = -1;
+        int i = 0;
+        int j = 0;
+        for (int k = 0; k < check.length; k++) {
+            first = lineMatcher(String.valueOf(reverseString(check[k])), word);
+            if (first != -1) {
+                ansRow = i - (check[k].trim().length() - 1) + first;
+                ansCol = j + (check[k].trim().length() - 1) - first;
+                break;
+            }
+            if (i != p.getRow() - 1) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        if (ansCol != -1) {
+            ans = new Result(ansRow, ansCol, word.length(), "leftDown");
         }
         return ans;
     }

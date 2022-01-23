@@ -14,9 +14,9 @@ public class Main {
         System.out.println("======");
         String[] test = Solver.diagonalize(puzzle);
         for(int i = 0; i < test.length; i++){
-            System.out.println(test[i]);
+            System.out.println(Solver.reverseString(test[i]));
         }
-        Result r = Solver.wordCheckRightUp(puzzle, puzzle.getWords()[7]);
+        Result r = Solver.wordCheckLeftDown(puzzle, "TSRAR");
         r.printResult(puzzle);
         
     }
