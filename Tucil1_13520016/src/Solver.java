@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Solver {
 
     public static int lineMatcher(String text, String pattern, Puzzle p) {
@@ -255,13 +257,12 @@ public class Solver {
         return res;
     }
 
+    // TODO: Fix when cols < rows vice versa
     public static String[] diagonalize(Puzzle p) {
         char[][] puzzle = p.getPuzzle();
         int min = Math.min(p.getCol(), p.getRow()) * 2;
-        if (p.getCol() == p.getRow()) {
-            min--;
-        }
-        String[] ans = new String[min];
+        String[] ans = new String[min+5];
+        Arrays.fill(ans, "");
         String temp = "";
         int i = 0;
         int j = 0;
@@ -303,7 +304,8 @@ public class Solver {
         if (p.getCol() == p.getRow()) {
             min--;
         }
-        String[] ans = new String[min];
+        String[] ans = new String[min+5];
+        Arrays.fill(ans, "");
         String temp = "";
         int i = p.getRow() - 1;
         int j = 0;
