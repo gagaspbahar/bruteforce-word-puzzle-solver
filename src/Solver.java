@@ -272,6 +272,7 @@ public class Solver {
             if(res.getType() != ""){
                 break;
             }
+            break;
         }
         return res;
     }

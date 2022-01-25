@@ -33,6 +33,7 @@ public class Main {
                     System.out.printf("%d. %s\n", i + 1, puzzle.getWords()[i]);
                     resultList[i].printResult(puzzle);
                 }
+                break;
             default:
                 Result.printPuzzleWithColor(puzzle, resultList);
                 break;
