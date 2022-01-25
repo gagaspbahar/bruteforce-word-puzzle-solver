@@ -34,6 +34,7 @@ public class Main {
                     resultList[i].printResult(puzzle);
                 }
             default:
+                Result.printPuzzleWithColor(puzzle, resultList);
                 break;
         }
         long time = (end - start);

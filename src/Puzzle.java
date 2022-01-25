@@ -75,7 +75,8 @@ public class Puzzle {
             i = 0;
             while (scfile.hasNextLine()) {
                 String line = scfile.nextLine();
-                this.words[i] = line.trim();
+                String noSpaceStr = line.replaceAll("\\s", "");
+                this.words[i] = noSpaceStr.trim();
                 i++;
             }
             this.wordsLength = i;
