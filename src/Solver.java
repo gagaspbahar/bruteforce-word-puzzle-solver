@@ -238,26 +238,44 @@ public class Solver {
     }
 
     public static Result allWordCheck(Puzzle p, String word) {
-        Result[] resultList = new Result[8];
-        resultList[0] = wordCheckRight(p, word);
-        resultList[1] = wordCheckLeft(p, word);
-        resultList[2] = wordCheckUp(p, word);
-        resultList[3] = wordCheckDown(p, word);
-        resultList[4] = wordCheckRightUp(p, word);
-        resultList[5] = wordCheckLeftDown(p, word);
-        resultList[6] = wordCheckRightDown(p, word);
-        resultList[7] = wordCheckLeftUp(p, word);
-
-        int i = 0;
         Result res = new Result();
         while (res.getType() == "") {
-            res = resultList[i];
-            i++;
+            res = wordCheckRight(p, word);
+            if(res.getType() != ""){
+                break;
+            }
+            res = wordCheckLeft(p, word);
+            if(res.getType() != ""){
+                break;
+            }
+            res = wordCheckUp(p, word);
+            if(res.getType() != ""){
+                break;
+            }
+            res = wordCheckDown(p, word);
+            if(res.getType() != ""){
+                break;
+            }
+            res = wordCheckRightUp(p, word);
+            if(res.getType() != ""){
+                break;
+            }
+            res = wordCheckLeftDown(p, word);
+            if(res.getType() != ""){
+                break;
+            }
+            res = wordCheckRightDown(p, word);
+            if(res.getType() != ""){
+                break;
+            }
+            res = wordCheckLeftUp(p, word);
+            if(res.getType() != ""){
+                break;
+            }
         }
         return res;
     }
 
-    // TODO: Fix when cols < rows vice versa
     public static String[] diagonalize(Puzzle p) {
         char[][] puzzle = p.getPuzzle();
         int min = Math.min(p.getCol(), p.getRow()) * 2;
