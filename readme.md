@@ -8,6 +8,9 @@ A word search puzzle solver made in Java, implemented with brute force algorithm
 ## Technologies Used
 - Java language
 
+## Dependencies
+- Java 17
+
 
 ## Features
 - Solving word search puzzles
@@ -17,3 +20,6 @@ A word search puzzle solver made in Java, implemented with brute force algorithm
 - `cd Tucil1_13520016`
 - `./build.bat`
 - `./run.bat`
+
+## Author
+Gagas Praharsa Bahar, 13520016
