@@ -21,5 +21,9 @@ A word search puzzle solver made in Java, implemented with brute force algorithm
 - `./build.bat`
 - `./run.bat`
 
+### Manual Build and Run
+- `javac -d bin/ src/*.java`
+- `cd bin && java Main`
+
 ## Author
 Gagas Praharsa Bahar, 13520016
